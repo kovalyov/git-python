@@ -1,3 +1,4 @@
 Clone project:
 https://github.com/kovalyov/git-python.git
 update
+update master
