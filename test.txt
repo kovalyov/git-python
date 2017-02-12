@@ -1,9 +1,1 @@
-Привет, я текстовый файл. 
-TEST  
-TEST  
-TEST  
-TEST  
-TEST  
-TEST  
-TEST  
-TEST 
+https://github.com/kovalyov/git-python.git
