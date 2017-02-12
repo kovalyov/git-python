@@ -5,7 +5,10 @@ import re
 import copy
 
 # Каталог из которого будем брать файлы
-directory = 'D:\\Reports\\For Bruce\\2017\\Timesheets 01-31\\'
+# Home PC
+directory = 'C:\\Users\\Andrey\\Desktop\\Timesheets 01-31\\'
+# Work PC
+# directory = 'D:\\Reports\\For Bruce\\2017\\Timesheets 01-31\\'
 # directory = '\\\\KH-FSRV\\Public\\Timesheets\\2017\\01.31\\'
 
 # Получаем список файлов в переменную timesheets
