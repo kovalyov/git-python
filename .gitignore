@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#IDEA Worksopace
+.idea/workspace.xml
+
 # C extensions
 *.so
 
