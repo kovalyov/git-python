@@ -62,3 +62,19 @@
 # # Чтение файла построчно
 # with open('employees.txt','r') as f:
 #     print(f.read())
+
+# Чтение файла
+import re
+
+filename = 'C:\\Users\\akovalyo\\Desktop\\employeesList.txt'
+file = open(filename, 'r')
+s = file.read()
+# listik = list(s)
+# name_surname = s.search('(.*) \d', i)
+# employees.append(name_surname.group(1))
+result = re.split(r'; ',s)
+file.close()
+
+print(s)
+print(result)
+
