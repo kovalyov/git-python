@@ -50,7 +50,7 @@ for i in timesheets:
     try:
         # Считывваем имя сотрудника и название его первого проекта из таймшита
         f = OpenExcel(directory + i)
-        username = f.read('C3')
+        username = f.read('C3').strip()
         project_1 = f.read('B8')
         # Считываем имя сотрудника из названия файла. Копируем строку до пробела и цифры.
         name_surname = re.search('(.*) \d', i)
