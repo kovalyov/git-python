@@ -1,4 +1,6 @@
 # git-python
+# Clone project:
+# https://github.com/kovalyov/git-python.git
 
 #Готово
 1. Проверить, что все сотрудникик создали файлы в опреденной папке с правильным названием
