@@ -15,8 +15,8 @@ file.close()
 # Home PC
 # directory = 'C:\\Users\\Andrey\\Desktop\\Timesheets 01-31\\'
 # Work PC
-directory = 'D:\\Reports\\For Bruce\\2017\\Timesheets 01-31\\'
-# directory = '\\\\KH-FSRV\\Public\\Timesheets\\2017\\02.15\\'
+# directory = 'D:\\Reports\\For Bruce\\2017\\Timesheets 01-31\\'
+directory = '\\\\KH-FSRV\\Public\\Timesheets\\2017\\02.28\\'
 
 # Получаем список таймшитов в переменную timesheets
 timesheets = os.listdir(directory)
@@ -60,14 +60,56 @@ for i in timesheets:
         if username != name_surname.group(1) or project_1 == 'Project1':
             wrong_timesheets.append(name_surname.group(1))
 
+        # Проверка, есть ли ошибка в файле в поле F4.
+        error_message=f.read('F4')
+        if len(error_message) > 0:
+            print('В таймшите %s ошибка! Она выглядит вот так - %s' % (username, error_message))
+            wrong_timesheets.append(name_surname.group(1))
+
     except Exception:
         e = sys.exc_info()[1]
-        print(e.args[0])
-        print(i)
+        # print(e.args[0])
+        print('==============================Exception========================================')
+        print(e)
 
+print('===============================================================================')
 # Печатаем списсок людей с некорректным excel файлом
 if len(wrong_timesheets) > 0:
     print('\nОшибка! Имя сотрудника или название проекта указано неверно.\nПнуть следующих людей:')
     for i in range(0, int(len(wrong_timesheets))):
         print(str(i + 1) + ') ' + wrong_timesheets[i])
 print('===============================================================================')
+
+
+# wrong_timesheets = []
+# try:
+#     # Считывваем имя сотрудника и название его первого проекта из таймшита
+#     f = OpenExcel(directory + timesheets[0])
+#     username = f.read('C3').strip()
+#     project_1 = f.read('B8')
+#     error_message=f.read('F4')
+#     holiday_day= f.read('E17') # Проверка праздничных дней
+#
+#     if len(error_message) > 0:
+#         print('В таймшите %s ошибка! Она выглядит вот так - %s' % (username, error_message))
+#         # wrong_timesheets.append(name_surname.group(1))
+#
+#     elif holiday_day != 8:
+#         print("Выходной не отмечен.")
+#         # wrong_timesheets.append(name_surname.group(1))
+#
+#
+#
+# except Exception:
+#     e = sys.exc_info()[1]
+#     # print(e.args[0])
+#     print('==============================Exception========================================')
+#     print(e)
+#
+# print('===============================================================================')
+# # Печатаем списсок людей с некорректным excel файлом
+# if len(wrong_timesheets) > 0:
+#     print('\nОшибка! Имя сотрудника или название проекта указано неверно.\nПнуть следующих людей:')
+#     for i in range(0, int(len(wrong_timesheets))):
+#         print(str(i + 1) + ') ' + wrong_timesheets[i])
+# print('===============================================================================')
