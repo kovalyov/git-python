@@ -10,11 +10,11 @@ import copy
 
 # Каталог из которого будем брать таймшиты
 # Home PC
-directory = 'C:\\Users\\Andrey\\Desktop\\Timesheets 01-31\\'
-filename = 'C:\\Users\\Andrey\\Desktop\\employeesList.txt'
+# directory = 'C:\\Users\\Andrey\\Desktop\\Timesheets 01-31\\'
+# filename = 'C:\\Users\\Andrey\\Desktop\\employeesList.txt'
 # Work PC
-# filename = 'C:\\Users\\akovalyo\\Desktop\\employeesList.txt'
-# directory = 'D:\\Reports\\For Bruce\\2017\\Timesheets 01-31\\'
+filename = 'C:\\Users\\akovalyo\\Desktop\\employeesList.txt'
+directory = 'D:\\Reports\\For Bruce\\2017\\Timesheets 01-31\\'
 # directory = '\\\\KH-FSRV\\Public\\Timesheets\\2017\\02.28\\'
 
 
@@ -28,8 +28,6 @@ file.close()
 timesheets = os.listdir(directory)
 
 # ****************************** Удаляем временные файлы из списка файлов считанных из директории ***********************************
-# print(len(timesheets))
-# print(timesheets)
 # создать временную копию списка таймшита
 tmp_timesheets = copy.deepcopy(timesheets)
 
@@ -37,8 +35,6 @@ for i in tmp_timesheets:
     if i[0] == '~':
         # print (i)
         timesheets.remove(i)
-# print(len(timesheets))
-# print(timesheets)
 del tmp_timesheets
 
 #
@@ -74,6 +70,23 @@ for i in range(0, int(len(tmp_employees))):
     print(str(i + 1) + ') ' + str(name[1]))
 
 del tmp_employees
+
+
+# ************************ Проверка праздничных дней ************************************************
+is_holiday = input("Есть ли выходные праздничные дни в этом месяце? (yes/no): ")
+holiday = [] # массив содержащий номера ячеек праздничных выходных
+if is_holiday == 'yes':
+    sum_holiday_day = int(input("Сколько выходных дней в этот период?: "))
+    # print(str(sum_holiday_day))
+    while sum_holiday_day > 0:
+        holiday_cell = input("Введите номер ячейки с праздником на латинице: \n")
+        holiday.append(holiday_cell)
+        sum_holiday_day -= 1
+else:
+    print("Нечего отдыхать! Труд сделал из обезьяны человека!")
+
+print(holiday)
+
 # ************************ Проверка поле "Имя" и поле "Проект" ************************************************
 print('===============================================================================')
 # wrong_timesheets = []
@@ -118,16 +131,10 @@ for i in timesheets:
         f = OpenExcel(directory + i)    #         f = OpenExcel(directory + i)
         username = f.read('C3').strip()
         project_1 = f.read('B8')
-        error_message=f.read('F4')  # Ячейка F4 содержит ошибку, в случае если сумма часов за каждый рабочий день не равна 8
-        holiday_day= f.read('E17')  # Проверка праздничных дней
+        error_message =f.read('F4')  # Ячейка F4 содержит ошибку, в случае если сумма часов за каждый рабочий день не равна 8
+        # holiday_day = f.read('E17')  # Проверка праздничных дней
         # Считываем имя сотрудника из названия файла. Копируем строку до пробела и цифры.
         name_surname = re.search('(.*) \d', i)
-        #         # Печатаем имя и фамилию сотрудников
-        #         # print(name_surname.group(1))
-
-        #         if username != name_surname.group(1) or project_1 == 'Project1':
-        #             wrong_timesheets.append(name_surname.group(1))
-
 
         if len(error_message) > 0:
             print(f'В таймшите {username} ошибка! Она выглядит вот так - {error_message}')
@@ -139,7 +146,6 @@ for i in timesheets:
 
         if  project_1 == 'Project1':
             print('В таймшите %s ошибка в имени проекта !' % name_surname.group(1))
-
 
         # elif holiday_day != 8:
         #     print("Выходной не отмечен.")
